@@ -247,31 +247,31 @@ function loop() {
         damnPy = -1000;
     }
 
-    if (followmouse === "s80") {
-        if (mousey < 127) {
-            s80Py = 7
-        }
-    }
-    if (followmouse === "gkmc") {
-        if (mousey < 127) {
-            gkmcPy = 7
-        }
-    }
-    if (followmouse === "tpab") {
-        if (mousey < 127) {
-            tpabPy = 7
-        }
-    }
-    if (followmouse === "uu") {
-        if (mousey < 127) {
-            uuPy = 7
-        }
-    }
-    if (followmouse === "damn") {
-        if (mousey < 127) {
-            damnPy = 7
-        }
-    }
+    // if (followmouse === "s80") {
+    //     if (mousey < 127) {
+    //         s80Py = 7
+    //     }
+    // }
+    // if (followmouse === "gkmc") {
+    //     if (mousey < 127) {
+    //         gkmcPy = 7
+    //     }
+    // }
+    // if (followmouse === "tpab") {
+    //     if (mousey < 127) {
+    //         tpabPy = 7
+    //     }
+    // }
+    // if (followmouse === "uu") {
+    //     if (mousey < 127) {
+    //         uuPy = 7
+    //     }
+    // }
+    // if (followmouse === "damn") {
+    //     if (mousey < 127) {
+    //         damnPy = 7
+    //     }
+    // }
 
 
 
@@ -288,7 +288,27 @@ document.addEventListener("mouseup", mouseupmanager);
 
 function mouseupmanager() {
     mouseisclicked = false;
+    if (followmouse === "od") {
+        odx = odPx
+        ody = odPy
+    } else if (followmouse === "s80" ) {
+        s80x = s80Px
+        s80y = s80Py
+    } else if (followmouse === "gkmc") {
+        gkmcx = gkmcPx
+        gkmcy = gkmcPy
+    } else if (followmouse === "tpab") {
+        tpabx = tpabPx
+        tpaby = tpabPy
+    } else if (followmouse === "uu") {
+        uux = uuPx
+        uuy = uuPy
+    } else {
+        damnx = damnPx
+        damny = damnPy
+    }
     followmouse = "none"
+    
 
 }
 
