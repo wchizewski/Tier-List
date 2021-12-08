@@ -48,8 +48,6 @@ let eRow = 1;
 let fRow = 1;
 let bottom = 1;
 
-
-
 requestAnimationFrame(loop);
 function loop() {
 
@@ -91,7 +89,6 @@ function loop() {
     ctx.fillRect(1293, 0, 7, 847)
     ctx.fillStyle = "lightblue"
     ctx.fillRect(0, 847, 1300, 153)
-
 
     // draw images
     ctx.drawImage(odImg, odx, ody, 113, 113)
@@ -244,7 +241,6 @@ function loop() {
     ctx.drawImage(tpabImg, tpabPx, tpabPy, 113, 113)
     ctx.globalAlpha = 1
 
-
     requestAnimationFrame(loop);
 }
 
@@ -268,7 +264,6 @@ function whichImg(num) {
         damnPy = num;
     }
 }
-
 
 // event listrebnersd
 document.addEventListener("mousemove", mousemovemanager);
@@ -300,22 +295,16 @@ function mouseupmanager() {
             sRow++;
         } else if (mousey < 247) {
             aRow++;
-
         } else if (mousey < 367) {
             bRow++;
-
         } else if (mousey < 487) {
             cRow++;
-
         } else if (mousey < 607) {
             dRow++;
-
         } else if (mousey < 727) {
             eRow++;
-
         } else if (mousey < 847) {
             fRow++;
-
         } else {
             bottom++;
         }
@@ -323,7 +312,6 @@ function mouseupmanager() {
     followmouse = "none"
     mouseisclicked = false;
 }
-
 
 function mousedownmanager() {
     mouseisclicked = true;
@@ -350,29 +338,21 @@ function mousedownmanager() {
             sRow--;
         } else if (mousey < 247) {
             aRow--;
-
         } else if (mousey < 367) {
             bRow--;
-
         } else if (mousey < 487) {
             cRow--;
-
         } else if (mousey < 607) {
             dRow--;
-
         } else if (mousey < 727) {
             eRow--;
-
         } else if (mousey < 847) {
             fRow--;
-
         } else {
             bottom--;
         }
     }
 }
-
-
 
 function mousemovemanager(event) {
     let cnvRect = cnv.getBoundingClientRect();
