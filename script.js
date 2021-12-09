@@ -14,30 +14,6 @@ let uuImg = document.getElementById("untitledunmastered")
 let damnImg = document.getElementById("damn");
 let mousex, mousey;
 let mouseisclicked;
-let odx = 0;
-let ody = 847;
-let odPx = 127;
-let odPy = -1000;
-let s80x = 113;
-let s80y = 847;
-let s80Px = 127;
-let s80Py = -1000;
-let gkmcx = 226;
-let gkmcy = 847;
-let gkmcPx = 127;
-let gkmcPy = -1000;
-let tpabx = 339;
-let tpaby = 847;
-let tpabPx = 127;
-let tpabPy = -1000;
-let uux = 452;
-let uuy = 847;
-let uuPx = 127;
-let uuPy = -1000;
-let damnx = 565;
-let damny = 847;
-let damnPx = 127;
-let damnPy = -1000;
 let followmouse = "none";
 let sRow = 1;
 let aRow = 1;
@@ -48,8 +24,80 @@ let eRow = 1;
 let fRow = 1;
 let bottom = 1;
 
+function newImg(x, y, w, h) {
+    return {
+        x: x,
+        y: y,
+        w: w,
+        h: h,
+    }
+}
+
+let od = newImg(0, 847, 113, 113)
+let s80 = newImg(113, 847, 113, 113)
+let gkmc = newImg(226, 847, 113, 113)
+let tpab = newImg(339, 847, 113, 113)
+let uu = newImg(452, 847, 113, 113)
+let damn = newImg(565, 847, 113, 113)
+let odP = newImg(0, 847, 113, 113)
+let s80P = newImg(113, 847, 113, 113)
+let gkmcP = newImg(226, 847, 113, 113)
+let tpabP = newImg(339, 847, 113, 113)
+let uuP = newImg(452, 847, 113, 113)
+let damnP = newImg(565, 847, 113, 113)
+
+function imgxHandler(anImgP) {
+    if ((anImgP.x === od.x && anImgP.y === od.y) || (anImgP.x === s80.x && anImgP.y === s80.y) || (anImgP.x === gkmc.x && anImgP.y === gkmc.y) || (anImgP.x === tpab.x && anImgP.y === tpab.y) || (anImgP.x === uu.x && anImgP.y === uu.y) || (anImgP.x === damn.x && anImgP.y === damn.y)) {
+        anImgP.x += 113
+        console.log("yee")
+    } else {
+        anImgP.x = 127;
+        console.log("gree")
+    }
+}
+
+function previewHandler(anImgP) {
+    anImgP.y = ((Math.floor(mousey / 120))) * 120 + 7
+}
+
 requestAnimationFrame(loop);
 function loop() {
+    if (followmouse === "od") {
+        od.x = mousex - 56.5
+        od.y = mousey - 56.5
+        imgxHandler(odP);
+        previewHandler(odP);
+    }
+    if (followmouse === "s80") {
+        s80.x = mousex - 56.5
+        s80.y = mousey - 56.5
+        imgxHandler(s80P);
+        previewHandler(s80P);
+    }
+    if (followmouse === "gkmc") {
+        gkmc.x = mousex - 56.5
+        gkmc.y = mousey - 56.5
+        imgxHandler(gkmcP);
+        previewHandler(gkmcP);
+    }
+    if (followmouse === "tpab") {
+        tpab.x = mousex - 56.5
+        tpab.y = mousey - 56.5
+        imgxHandler(tpabP);
+        previewHandler(tpabP);
+    }
+    if (followmouse === "uu") {
+        uu.x = mousex - 56.5
+        uu.y = mousey - 56.5
+        imgxHandler(uuP);
+        previewHandler(uuP);
+    }
+    if (followmouse === "damn") {
+        damn.x = mousex - 56.5
+        damn.y = mousey - 56.5
+        imgxHandler(damnP);
+        previewHandler(damnP);
+    }
 
     // tier list
     ctx.fillStyle = "rgb(26, 26, 26)"
@@ -91,179 +139,154 @@ function loop() {
     ctx.fillRect(0, 847, 1300, 153)
 
     // draw images
-    ctx.drawImage(odImg, odx, ody, 113, 113)
-    ctx.drawImage(s80Img, s80x, s80y, 113, 113)
-    ctx.drawImage(gkmcImg, gkmcx, gkmcy, 113, 113)
-    ctx.drawImage(uuImg, uux, uuy, 113, 113)
-    ctx.drawImage(damnImg, damnx, damny, 113, 113)
-    ctx.drawImage(tpabImg, tpabx, tpaby, 113, 113)
+    ctx.drawImage(odImg, od.x, od.y, od.w, od.h)
+    ctx.drawImage(s80Img, s80.x, s80.y, s80.w, s80.h)
+    ctx.drawImage(gkmcImg, gkmc.x, gkmc.y, gkmc.w, gkmc.h)
+    ctx.drawImage(uuImg, uu.x, uu.y, uu.w, uu.h)
+    ctx.drawImage(damnImg, damn.x, damn.y, damn.w, damn.h)
+    ctx.drawImage(tpabImg, tpab.x, tpab.y, tpab.w, tpab.h)
 
-    if (followmouse === "od") {
-        odx = mousex - 56.5
-        ody = mousey - 56.5
-    }
-    if (followmouse === "s80") {
-        s80x = mousex - 56.5
-        s80y = mousey - 56.5
-    }
-    if (followmouse === "gkmc") {
-        gkmcx = mousex - 56.5
-        gkmcy = mousey - 56.5
-    }
-    if (followmouse === "tpab") {
-        tpabx = mousex - 56.5
-        tpaby = mousey - 56.5
-    }
-    if (followmouse === "uu") {
-        uux = mousex - 56.5
-        uuy = mousey - 56.5
-    }
-    if (followmouse === "damn") {
-        damnx = mousex - 56.5
-        damny = mousey - 56.5
-    }
-
-    if (mousey < 127) {
-        whichImg(7);
-        if (followmouse === "od") {
-            odPx = sRow * 113 + 14
-        } else if (followmouse === "s80") {
-            s80Px = sRow * 113 + 14
-        } else if (followmouse === "gkmc") {
-            gkmcPx = sRow * 113 + 14
-        } else if (followmouse === "tpab") {
-            tpabPx = sRow * 113 + 14
-        } else if (followmouse === "uu") {
-            uuPx = sRow * 113 + 14
-        } else if (followmouse === "damn") {
-            damnPx = sRow * 113 + 14 
-        }
-    } else if (mousey < 247) {
-        whichImg(127);
-        if (followmouse === "od") {
-            odPx = aRow * 113 + 14
-        } else if (followmouse === "s80") {
-            s80Px = aRow * 113 + 14
-        } else if (followmouse === "gkmc") {
-            gkmcPx = aRow * 113 + 14
-        } else if (followmouse === "tpab") {
-            tpabPx = aRow * 113 + 14
-        } else if (followmouse === "uu") {
-            uuPx = aRow * 113 + 14
-        } else if (followmouse === "damn") {
-            damnPx = aRow * 113 + 14 
-        }
-    } else if (mousey < 367) {
-        whichImg(247);
-        if (followmouse === "od") {
-            odPx = bRow * 113 + 14
-        } else if (followmouse === "s80") {
-            s80Px = bRow * 113 + 14
-        } else if (followmouse === "gkmc") {
-            gkmcPx = bRow * 113 + 14
-        } else if (followmouse === "tpab") {
-            tpabPx = bRow * 113 + 14
-        } else if (followmouse === "uu") {
-            uuPx = bRow * 113 + 14
-        } else if (followmouse === "damn") {
-            damnPx = bRow * 113 + 14 
-        }
-    } else if (mousey < 487) {
-        whichImg(367);
-        if (followmouse === "od") {
-            odPx = cRow * 113 + 14
-        } else if (followmouse === "s80") {
-            s80Px = cRow * 113 + 14
-        } else if (followmouse === "gkmc") {
-            gkmcPx = cRow * 113 + 14
-        } else if (followmouse === "tpab") {
-            tpabPx = cRow * 113 + 14
-        } else if (followmouse === "uu") {
-            uuPx = cRow * 113 + 14
-        } else if (followmouse === "damn") {
-            damnPx = cRow * 113 + 14 
-        }
-    } else if (mousey < 607) {
-        whichImg(487);
-        if (followmouse === "od") {
-            odPx = dRow * 113 + 14
-        } else if (followmouse === "s80") {
-            s80Px = dRow * 113 + 14
-        } else if (followmouse === "gkmc") {
-            gkmcPx = dRow * 113 + 14
-        } else if (followmouse === "tpab") {
-            tpabPx = dRow * 113 + 14
-        } else if (followmouse === "uu") {
-            uuPx = dRow * 113 + 14
-        } else if (followmouse === "damn") {
-            damnPx = dRow * 113 + 14 
-        }
-    } else if (mousey < 727) {
-        whichImg(607);
-        if (followmouse === "od") {
-            odPx = eRow * 113 + 14
-        } else if (followmouse === "s80") {
-            s80Px = eRow * 113 + 14
-        } else if (followmouse === "gkmc") {
-            gkmcPx = eRow * 113 + 14
-        } else if (followmouse === "tpab") {
-            tpabPx = eRow * 113 + 14
-        } else if (followmouse === "uu") {
-            uuPx = eRow * 113 + 14
-        } else if (followmouse === "damn") {
-            damnPx = eRow * 113 + 14 
-        }
-    } else if (mousey < 847) {
-        whichImg(727);
-        if (followmouse === "od") {
-            odPx = fRow * 113 + 14
-        } else if (followmouse === "s80") {
-            s80Px = fRow * 113 + 14
-        } else if (followmouse === "gkmc") {
-            gkmcPx = fRow * 113 + 14
-        } else if (followmouse === "tpab") {
-            tpabPx = fRow * 113 + 14
-        } else if (followmouse === "uu") {
-            uuPx = fRow * 113 + 14
-        } else if (followmouse === "damn") {
-            damnPx = fRow * 113 + 14 
-        }
-    } else {
-        odPy = -1000;
-    }
+    // if (mousey < 127) {
+    //     whichImg(7);
+    //     if (followmouse === "od") {
+    //         odP.x = sRow * 113 + 14
+    //     } else if (followmouse === "s80") {
+    //         s80P.x = sRow * 113 + 14
+    //     } else if (followmouse === "gkmc") {
+    //         gkmcP.x = sRow * 113 + 14
+    //     } else if (followmouse === "tpab") {
+    //         tpabP.x = sRow * 113 + 14
+    //     } else if (followmouse === "uu") {
+    //         uuP.x = sRow * 113 + 14
+    //     } else if (followmouse === "damn") {
+    //         damnP.x = sRow * 113 + 14
+    //     }
+    // } else if (mousey < 247) {
+    //     whichImg(127);
+    //     if (followmouse === "od") {
+    //         odP.x = aRow * 113 + 14
+    //     } else if (followmouse === "s80") {
+    //         s80P.x = aRow * 113 + 14
+    //     } else if (followmouse === "gkmc") {
+    //         gkmcP.x = aRow * 113 + 14
+    //     } else if (followmouse === "tpab") {
+    //         tpabP.x = aRow * 113 + 14
+    //     } else if (followmouse === "uu") {
+    //         uuP.x = aRow * 113 + 14
+    //     } else if (followmouse === "damn") {
+    //         damnP.x = aRow * 113 + 14
+    //     }
+    // } else if (mousey < 367) {
+    //     whichImg(247);
+    //     if (followmouse === "od") {
+    //         odP.x = bRow * 113 + 14
+    //     } else if (followmouse === "s80") {
+    //         s80P.x = bRow * 113 + 14
+    //     } else if (followmouse === "gkmc") {
+    //         gkmcP.x = bRow * 113 + 14
+    //     } else if (followmouse === "tpab") {
+    //         tpabP.x = bRow * 113 + 14
+    //     } else if (followmouse === "uu") {
+    //         uuP.x = bRow * 113 + 14
+    //     } else if (followmouse === "damn") {
+    //         damnP.x = bRow * 113 + 14
+    //     }
+    // } else if (mousey < 487) {
+    //     whichImg(367);
+    //     if (followmouse === "od") {
+    //         odP.x = cRow * 113 + 14
+    //     } else if (followmouse === "s80") {
+    //         s80P.x = cRow * 113 + 14
+    //     } else if (followmouse === "gkmc") {
+    //         gkmcP.x = cRow * 113 + 14
+    //     } else if (followmouse === "tpab") {
+    //         tpabP.x = cRow * 113 + 14
+    //     } else if (followmouse === "uu") {
+    //         uuP.x = cRow * 113 + 14
+    //     } else if (followmouse === "damn") {
+    //         damnP.x = cRow * 113 + 14
+    //     }
+    // } else if (mousey < 607) {
+    //     whichImg(487);
+    //     if (followmouse === "od") {
+    //         odP.x = dRow * 113 + 14
+    //     } else if (followmouse === "s80") {
+    //         s80P.x = dRow * 113 + 14
+    //     } else if (followmouse === "gkmc") {
+    //         gkmcP.x = dRow * 113 + 14
+    //     } else if (followmouse === "tpab") {
+    //         tpabP.x = dRow * 113 + 14
+    //     } else if (followmouse === "uu") {
+    //         uuP.x = dRow * 113 + 14
+    //     } else if (followmouse === "damn") {
+    //         damnP.x = dRow * 113 + 14
+    //     }
+    // } else if (mousey < 727) {
+    //     whichImg(607);
+    //     if (followmouse === "od") {
+    //         odP.x = eRow * 113 + 14
+    //     } else if (followmouse === "s80") {
+    //         s80P.x = eRow * 113 + 14
+    //     } else if (followmouse === "gkmc") {
+    //         gkmcP.x = eRow * 113 + 14
+    //     } else if (followmouse === "tpab") {
+    //         tpabP.x = eRow * 113 + 14
+    //     } else if (followmouse === "uu") {
+    //         uuP.x = eRow * 113 + 14
+    //     } else if (followmouse === "damn") {
+    //         damnP.x = eRow * 113 + 14
+    //     }
+    // } else if (mousey < 847) {
+    //     whichImg(727);
+    //     if (followmouse === "od") {
+    //         odP.x = fRow * 113 + 14
+    //     } else if (followmouse === "s80") {
+    //         s80P.x = fRow * 113 + 14
+    //     } else if (followmouse === "gkmc") {
+    //         gkmcP.x = fRow * 113 + 14
+    //     } else if (followmouse === "tpab") {
+    //         tpabP.x = fRow * 113 + 14
+    //     } else if (followmouse === "uu") {
+    //         uuP.x = fRow * 113 + 14
+    //     } else if (followmouse === "damn") {
+    //         damnP.x = fRow * 113 + 14
+    //     }
+    // } else {
+    //     odP.y = -1000;
+    // }
 
     ctx.globalAlpha = 0.4
-    ctx.drawImage(odImg, odPx, odPy, 113, 113)
-    ctx.drawImage(s80Img, s80Px, s80Py, 113, 113)
-    ctx.drawImage(gkmcImg, gkmcPx, gkmcPy, 113, 113)
-    ctx.drawImage(uuImg, uuPx, uuPy, 113, 113)
-    ctx.drawImage(damnImg, damnPx, damnPy, 113, 113)
-    ctx.drawImage(tpabImg, tpabPx, tpabPy, 113, 113)
+    ctx.drawImage(odImg, odP.x, odP.y, 113, 113)
+    ctx.drawImage(s80Img, s80P.x, s80P.y, 113, 113)
+    ctx.drawImage(gkmcImg, gkmcP.x, gkmcP.y, 113, 113)
+    ctx.drawImage(uuImg, uuP.x, uuP.y, 113, 113)
+    ctx.drawImage(damnImg, damnP.x, damnP.y, 113, 113)
+    ctx.drawImage(tpabImg, tpabP.x, tpabP.y, 113, 113)
     ctx.globalAlpha = 1
 
     requestAnimationFrame(loop);
 }
 
-function whichImg(num) {
-    if (followmouse === "od") {
-        odPy = num;
-    }
-    if (followmouse === "s80") {
-        s80Py = num;
-    }
-    if (followmouse === "gkmc") {
-        gkmcPy = num;
-    }
-    if (followmouse === "tpab") {
-        tpabPy = num;
-    }
-    if (followmouse === "uu") {
-        uuPy = num;
-    }
-    if (followmouse === "damn") {
-        damnPy = num;
-    }
-}
+// function whichImg(num) {
+//     if (followmouse === "od") {
+//         odP.y = num;
+//     }
+//     if (followmouse === "s80") {
+//         s80P.y = num;
+//     }
+//     if (followmouse === "gkmc") {
+//         gkmcP.y = num;
+//     }
+//     if (followmouse === "tpab") {
+//         tpabP.y = num;
+//     }
+//     if (followmouse === "uu") {
+//         uuP.y = num;
+//     }
+//     if (followmouse === "damn") {
+//         damnP.y = num;
+//     }
+// }
 
 // event listrebnersd
 document.addEventListener("mousemove", mousemovemanager);
@@ -272,23 +295,23 @@ document.addEventListener("mouseup", mouseupmanager);
 
 function mouseupmanager() {
     if (followmouse === "od") {
-        odx = odPx
-        ody = odPy
+        od.x = odP.x
+        od.y = odP.y
     } else if (followmouse === "s80") {
-        s80x = s80Px
-        s80y = s80Py
+        s80.x = s80P.x
+        s80.y = s80P.y
     } else if (followmouse === "gkmc") {
-        gkmcx = gkmcPx
-        gkmcy = gkmcPy
+        gkmc.x = gkmcP.x
+        gkmc.y = gkmcP.y
     } else if (followmouse === "tpab") {
-        tpabx = tpabPx
-        tpaby = tpabPy
+        tpab.x = tpabP.x
+        tpab.y = tpabP.y
     } else if (followmouse === "uu") {
-        uux = uuPx
-        uuy = uuPy
+        uu.x = uuP.x
+        uu.y = uuP.y
     } else if (followmouse === "damn") {
-        damnx = damnPx
-        damny = damnPy
+        damn.x = damnP.x
+        damn.y = damnP.y
     }
     if (followmouse != "none") {
         if (mousey < 127) {
@@ -315,22 +338,23 @@ function mouseupmanager() {
 
 function mousedownmanager() {
     mouseisclicked = true;
-    if (mouseisclicked && mousex > odx && mousex < odx + 113 && mousey > ody && mousey < ody + 113) {
+    if (mouseisclicked && mousex > od.x && mousex < od.x + 113 && mousey > od.y && mousey < od.y + 113) {
         followmouse = "od"
+        console.log("yee")
     }
-    if (mouseisclicked && mousex > s80x && mousex < s80x + 113 && mousey > s80y && mousey < s80y + 113) {
+    if (mouseisclicked && mousex > s80.x && mousex < s80.x + 113 && mousey > s80.y && mousey < s80.y + 113) {
         followmouse = "s80"
     }
-    if (mouseisclicked && mousex > gkmcx && mousex < gkmcx + 113 && mousey > gkmcy && mousey < gkmcy + 113) {
+    if (mouseisclicked && mousex > gkmc.x && mousex < gkmc.x + 113 && mousey > gkmc.y && mousey < gkmc.y + 113) {
         followmouse = "gkmc"
     }
-    if (mouseisclicked && mousex > tpabx && mousex < tpabx + 113 && mousey > tpaby && mousey < tpaby + 113) {
+    if (mouseisclicked && mousex > tpab.x && mousex < tpab.x + 113 && mousey > tpab.y && mousey < tpab.y + 113) {
         followmouse = "tpab"
     }
-    if (mouseisclicked && mousex > uux && mousex < uux + 113 && mousey > uuy && mousey < uuy + 113) {
+    if (mouseisclicked && mousex > uu.x && mousex < uu.x + 113 && mousey > uu.y && mousey < uu.y + 113) {
         followmouse = "uu"
     }
-    if (mouseisclicked && mousex > damnx && mousex < damnx + 113 && mousey > damny && mousey < damny + 113) {
+    if (mouseisclicked && mousex > damn.x && mousex < damn.x + 113 && mousey > damn.y && mousey < damn.y + 113) {
         followmouse = "damn"
     }
     if (followmouse != "none") {
