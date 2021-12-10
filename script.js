@@ -23,40 +23,52 @@ let dRow = 1;
 let eRow = 1;
 let fRow = 1;
 let bottom = 1;
+let imgEdge;
 
-function newImg(x, y, w, h) {
+function newImg(x, y, w, h, row) {
     return {
         x: x,
         y: y,
         w: w,
         h: h,
+        row: row,
     }
 }
 
-let od = newImg(0, 847, 113, 113)
-let s80 = newImg(113, 847, 113, 113)
-let gkmc = newImg(226, 847, 113, 113)
-let tpab = newImg(339, 847, 113, 113)
-let uu = newImg(452, 847, 113, 113)
-let damn = newImg(565, 847, 113, 113)
-let odP = newImg(0, 847, 113, 113)
-let s80P = newImg(113, 847, 113, 113)
-let gkmcP = newImg(226, 847, 113, 113)
-let tpabP = newImg(339, 847, 113, 113)
-let uuP = newImg(452, 847, 113, 113)
-let damnP = newImg(565, 847, 113, 113)
+let od = newImg(0, 847, 113, 113, "bottom")
+let s80 = newImg(113, 847, 113, 113, "bottom")
+let gkmc = newImg(226, 847, 113, 113, "bottom")
+let tpab = newImg(339, 847, 113, 113, "bottom")
+let uu = newImg(452, 847, 113, 113, "bottom")
+let damn = newImg(565, 847, 113, 113, "bottom")
+let odP = newImg(0, 847, 113, 113, "bottom")
+let s80P = newImg(113, 847, 113, 113, "bottom")
+let gkmcP = newImg(226, 847, 113, 113, "bottom")
+let tpabP = newImg(339, 847, 113, 113, "bottom")
+let uuP = newImg(452, 847, 113, 113, "bottom")
+let damnP = newImg(565, 847, 113, 113, "bottom")
 
 function imgxHandler(anImgP) {
-    if ((anImgP.x === od.x && anImgP.y === od.y) || (anImgP.x === s80.x && anImgP.y === s80.y) || (anImgP.x === gkmc.x && anImgP.y === gkmc.y) || (anImgP.x === tpab.x && anImgP.y === tpab.y) || (anImgP.x === uu.x && anImgP.y === uu.y) || (anImgP.x === damn.x && anImgP.y === damn.y)) {
-        anImgP.x += 113
-        console.log("yee")
+    if (anImgP.row === "S"){
+        anImgP.x = sRow * 113 + 14;
+    } else if (anImgP.row === "A") {
+        anImgP.x = aRow * 113 + 14;
+    } else if (anImgP.row === "B") {
+        anImgP.x = bRow * 113 + 14;
+    } else if (anImgP.row === "C") {
+        anImgP.x = cRow * 113 + 14;
+    } else if (anImgP.row === "D") {
+        anImgP.x = dRow * 113 + 14;
+    } else if (anImgP.row === "E") {
+        anImgP.x = eRow * 113 + 14;
+    } else if (anImgP.row === "F") {
+        anImgP.x = fRow * 113 + 14;
     } else {
-        anImgP.x = 127;
-        console.log("gree")
+        anImgP.x = bottom * 113 + 14;
     }
 }
 
-function previewHandler(anImgP) {
+function previewYHandler(anImgP) {
     anImgP.y = ((Math.floor(mousey / 120))) * 120 + 7
 }
 
@@ -65,39 +77,41 @@ function loop() {
     if (followmouse === "od") {
         od.x = mousex - 56.5
         od.y = mousey - 56.5
-        imgxHandler(odP);
-        previewHandler(odP);
+        previewYHandler(odP);
     }
     if (followmouse === "s80") {
         s80.x = mousex - 56.5
         s80.y = mousey - 56.5
-        imgxHandler(s80P);
-        previewHandler(s80P);
+        previewYHandler(s80P);
     }
     if (followmouse === "gkmc") {
         gkmc.x = mousex - 56.5
         gkmc.y = mousey - 56.5
-        imgxHandler(gkmcP);
-        previewHandler(gkmcP);
+        previewYHandler(gkmcP);
     }
     if (followmouse === "tpab") {
         tpab.x = mousex - 56.5
         tpab.y = mousey - 56.5
-        imgxHandler(tpabP);
-        previewHandler(tpabP);
+        previewYHandler(tpabP);
     }
     if (followmouse === "uu") {
         uu.x = mousex - 56.5
         uu.y = mousey - 56.5
-        imgxHandler(uuP);
-        previewHandler(uuP);
+        previewYHandler(uuP);
     }
     if (followmouse === "damn") {
         damn.x = mousex - 56.5
         damn.y = mousey - 56.5
-        imgxHandler(damnP);
-        previewHandler(damnP);
+        previewYHandler(damnP);
     }
+
+    imgxHandler(odP);
+    imgxHandler(s80P);
+    imgxHandler(gkmcP);
+    imgxHandler(tpabP);
+    imgxHandler(uuP);
+    imgxHandler(damnP);
+
 
     // tier list
     ctx.fillStyle = "rgb(26, 26, 26)"
