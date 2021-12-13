@@ -49,7 +49,25 @@ let uuP = newImg(452, 847, 113, 113, "bottom")
 let damnP = newImg(565, 847, 113, 113, "bottom")
 
 function imgxHandler(anImgP) {
-    if (anImgP.row === "S"){
+    if (anImgP.y < 127) {
+        anImgP.row = "S"
+    } else if (anImgP.y < 247) {
+        anImgP.row = "A"
+    } else if (anImgP.y < 367) {
+        anImgP.row = "B"
+    } else if (anImgP.y < 487) {
+        anImgP.row = "C"
+    } else if (anImgP.y < 607) {
+        anImgP.row = "D"
+    } else if (anImgP.y < 727) {
+        anImgP.row = "E"
+    } else if (anImgP.y < 847) {
+        anImgP.row = "F"
+    } else {
+        anImgP.row = "bottom"
+    }
+
+    if (anImgP.row === "S") {
         anImgP.x = sRow * 113 + 14;
     } else if (anImgP.row === "A") {
         anImgP.x = aRow * 113 + 14;
@@ -66,11 +84,31 @@ function imgxHandler(anImgP) {
     } else {
         anImgP.x = bottom * 113 + 14;
     }
+
+    if (anImgP.row === "S") {
+        sRow++;
+    } else if (anImgP.row === "A") {
+        aRow++;
+    } else if (anImgP.row === "B") {
+        bRow++;
+    } else if (anImgP.row === "C") {
+        cRow++;
+    } else if (anImgP.row === "D") {
+        dRow++;
+    } else if (anImgP.row === "E") {
+        eRow++;
+    } else if (anImgP.row === "F") {
+        fRow++;
+    } else if (anImgP.row === "bottom") {
+        bottom++;
+    }
 }
 
 function previewYHandler(anImgP) {
     anImgP.y = ((Math.floor(mousey / 120))) * 120 + 7
 }
+
+
 
 requestAnimationFrame(loop);
 function loop() {
@@ -111,7 +149,14 @@ function loop() {
     imgxHandler(tpabP);
     imgxHandler(uuP);
     imgxHandler(damnP);
-
+    sRow = 1;
+    aRow = 1;
+    bRow = 1;
+    cRow = 1;
+    dRow = 1;
+    eRow = 1;
+    fRow = 1;
+    bottom = -0.12;
 
     // tier list
     ctx.fillStyle = "rgb(26, 26, 26)"
@@ -278,6 +323,33 @@ function loop() {
     ctx.drawImage(tpabImg, tpabP.x, tpabP.y, 113, 113)
     ctx.globalAlpha = 1
 
+    if (!mouseisclicked) {
+        if (followmouse != "od") {
+            od.x = odP.x
+            od.y = odP.y
+        }
+        if (followmouse != "s80") {
+            s80.x = s80P.x
+            s80.y = s80P.y
+        }
+        if (followmouse != "gkmc") {
+            gkmc.x = gkmcP.x
+            gkmc.y = gkmcP.y
+        }
+        if (followmouse != "tpab") {
+            tpab.x = tpabP.x
+            tpab.y = tpabP.y
+        }
+        if (followmouse != "uu") {
+            uu.x = uuP.x
+            uu.y = uuP.y
+        }
+        if (followmouse != "damn") {
+            damn.x = damnP.x
+            damn.y = damnP.y
+        }
+    }
+
     requestAnimationFrame(loop);
 }
 
@@ -308,44 +380,44 @@ document.addEventListener("mousedown", mousedownmanager);
 document.addEventListener("mouseup", mouseupmanager);
 
 function mouseupmanager() {
-    if (followmouse === "od") {
-        od.x = odP.x
-        od.y = odP.y
-    } else if (followmouse === "s80") {
-        s80.x = s80P.x
-        s80.y = s80P.y
-    } else if (followmouse === "gkmc") {
-        gkmc.x = gkmcP.x
-        gkmc.y = gkmcP.y
-    } else if (followmouse === "tpab") {
-        tpab.x = tpabP.x
-        tpab.y = tpabP.y
-    } else if (followmouse === "uu") {
-        uu.x = uuP.x
-        uu.y = uuP.y
-    } else if (followmouse === "damn") {
-        damn.x = damnP.x
-        damn.y = damnP.y
-    }
-    if (followmouse != "none") {
-        if (mousey < 127) {
-            sRow++;
-        } else if (mousey < 247) {
-            aRow++;
-        } else if (mousey < 367) {
-            bRow++;
-        } else if (mousey < 487) {
-            cRow++;
-        } else if (mousey < 607) {
-            dRow++;
-        } else if (mousey < 727) {
-            eRow++;
-        } else if (mousey < 847) {
-            fRow++;
-        } else {
-            bottom++;
-        }
-    }
+    // if (followmouse === "od") {
+    //     od.x = odP.x
+    //     od.y = odP.y
+    // } else if (followmouse === "s80") {
+    //     s80.x = s80P.x
+    //     s80.y = s80P.y
+    // } else if (followmouse === "gkmc") {
+    //     gkmc.x = gkmcP.x
+    //     gkmc.y = gkmcP.y
+    // } else if (followmouse === "tpab") {
+    //     tpab.x = tpabP.x
+    //     tpab.y = tpabP.y
+    // } else if (followmouse === "uu") {
+    //     uu.x = uuP.x
+    //     uu.y = uuP.y
+    // } else if (followmouse === "damn") {
+    //     damn.x = damnP.x
+    //     damn.y = damnP.y
+    // }
+    // if (followmouse != "none") {
+    //     if (mousey < 127) {
+    //         sRow++;
+    //     } else if (mousey < 247) {
+    //         aRow++;
+    //     } else if (mousey < 367) {
+    //         bRow++;
+    //     } else if (mousey < 487) {
+    //         cRow++;
+    //     } else if (mousey < 607) {
+    //         dRow++;
+    //     } else if (mousey < 727) {
+    //         eRow++;
+    //     } else if (mousey < 847) {
+    //         fRow++;
+    //     } else {
+    //         bottom++;
+    //     }
+    // }
     followmouse = "none"
     mouseisclicked = false;
 }
@@ -370,25 +442,6 @@ function mousedownmanager() {
     }
     if (mouseisclicked && mousex > damn.x && mousex < damn.x + 113 && mousey > damn.y && mousey < damn.y + 113) {
         followmouse = "damn"
-    }
-    if (followmouse != "none") {
-        if (mousey < 127) {
-            sRow--;
-        } else if (mousey < 247) {
-            aRow--;
-        } else if (mousey < 367) {
-            bRow--;
-        } else if (mousey < 487) {
-            cRow--;
-        } else if (mousey < 607) {
-            dRow--;
-        } else if (mousey < 727) {
-            eRow--;
-        } else if (mousey < 847) {
-            fRow--;
-        } else {
-            bottom--;
-        }
     }
 }
 
