@@ -25,13 +25,14 @@ let fRow = 1;
 let bottom = 1;
 let imgEdge;
 
-function newImg(x, y, w, h, row) {
+function newImg(x, y, w, h, row, place) {
     return {
         x: x,
         y: y,
         w: w,
         h: h,
         row: row,
+        place: place
     }
 }
 
@@ -41,12 +42,12 @@ let gkmc = newImg(226, 847, 113, 113, "bottom")
 let tpab = newImg(339, 847, 113, 113, "bottom")
 let uu = newImg(452, 847, 113, 113, "bottom")
 let damn = newImg(565, 847, 113, 113, "bottom")
-let odP = newImg(0, 847, 113, 113, "bottom")
-let s80P = newImg(113, 847, 113, 113, "bottom")
-let gkmcP = newImg(226, 847, 113, 113, "bottom")
-let tpabP = newImg(339, 847, 113, 113, "bottom")
-let uuP = newImg(452, 847, 113, 113, "bottom")
-let damnP = newImg(565, 847, 113, 113, "bottom")
+let odP = newImg(0, 847, 113, 113, "bottom", 1)
+let s80P = newImg(113, 847, 113, 113, "bottom", 2)
+let gkmcP = newImg(226, 847, 113, 113, "bottom", 3)
+let tpabP = newImg(339, 847, 113, 113, "bottom", 4)
+let uuP = newImg(452, 847, 113, 113, "bottom", 5)
+let damnP = newImg(565, 847, 113, 113, "bottom", 6)
 
 function imgxHandler(anImgP) {
     if (anImgP.y < 127) {
@@ -68,24 +69,6 @@ function imgxHandler(anImgP) {
     }
 
     if (anImgP.row === "S") {
-        anImgP.x = sRow * 113 + 14;
-    } else if (anImgP.row === "A") {
-        anImgP.x = aRow * 113 + 14;
-    } else if (anImgP.row === "B") {
-        anImgP.x = bRow * 113 + 14;
-    } else if (anImgP.row === "C") {
-        anImgP.x = cRow * 113 + 14;
-    } else if (anImgP.row === "D") {
-        anImgP.x = dRow * 113 + 14;
-    } else if (anImgP.row === "E") {
-        anImgP.x = eRow * 113 + 14;
-    } else if (anImgP.row === "F") {
-        anImgP.x = fRow * 113 + 14;
-    } else {
-        anImgP.x = bottom * 113 + 14;
-    }
-
-    if (anImgP.row === "S") {
         sRow++;
     } else if (anImgP.row === "A") {
         aRow++;
@@ -102,6 +85,17 @@ function imgxHandler(anImgP) {
     } else if (anImgP.row === "bottom") {
         bottom++;
     }
+
+    if ((anImgP.x >= od.x + od.w + 1) || (anImgP.x >= s80.x + s80.w + 1) || (anImgP.x >= gkmc.x + gkmc.w + 1) || (anImgP.x >= tpab.x + tpab.w + 1) || (anImgP.x >= uu.x + uu.w + 1) || (anImgP.x >= damn.x + damn.w + 1)) {
+        anImgP.place--;
+    }
+
+    if (anImgP.y < 847) {
+        anImgP.x = anImgP.place * 113 + 14
+    } else {
+        anImgP.x = (anImgP.place - 1) * 113
+    }
+
 }
 
 function previewYHandler(anImgP) {
