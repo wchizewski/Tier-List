@@ -36,12 +36,12 @@ function newImg(x, y, w, h, row, place) {
     }
 }
 
-let od = newImg(0, 847, 113, 113, "bottom")
-let s80 = newImg(113, 847, 113, 113, "bottom")
-let gkmc = newImg(226, 847, 113, 113, "bottom")
-let tpab = newImg(339, 847, 113, 113, "bottom")
-let uu = newImg(452, 847, 113, 113, "bottom")
-let damn = newImg(565, 847, 113, 113, "bottom")
+let od = newImg(0, 847, 113, 113)
+let s80 = newImg(113, 847, 113, 113)
+let gkmc = newImg(226, 847, 113, 113)
+let tpab = newImg(339, 847, 113, 113)
+let uu = newImg(452, 847, 113, 113)
+let damn = newImg(565, 847, 113, 113)
 let odP = newImg(0, 847, 113, 113, "bottom", 1)
 let s80P = newImg(113, 847, 113, 113, "bottom", 2)
 let gkmcP = newImg(226, 847, 113, 113, "bottom", 3)
@@ -69,43 +69,42 @@ function imgxHandler(anImgP) {
     }
 
     if (anImgP.row === "S") {
-        sRow++;
+        anImgP.place = sRow
     } else if (anImgP.row === "A") {
-        aRow++;
+        anImgP.place = aRow
     } else if (anImgP.row === "B") {
-        bRow++;
+        anImgP.place = bRow
     } else if (anImgP.row === "C") {
-        cRow++;
+        anImgP.place = cRow
     } else if (anImgP.row === "D") {
-        dRow++;
+        anImgP.place = dRow
     } else if (anImgP.row === "E") {
-        eRow++;
+        anImgP.place = eRow
     } else if (anImgP.row === "F") {
-        fRow++;
+        anImgP.place = fRow
     } else if (anImgP.row === "bottom") {
         bottom++;
     }
-
-    if ((anImgP.x >= od.x + od.w + 1) || (anImgP.x >= s80.x + s80.w + 1) || (anImgP.x >= gkmc.x + gkmc.w + 1) || (anImgP.x >= tpab.x + tpab.w + 1) || (anImgP.x >= uu.x + uu.w + 1) || (anImgP.x >= damn.x + damn.w + 1)) {
-        anImgP.place--;
-    }
-
-    if (anImgP.y < 847) {
-        anImgP.x = anImgP.place * 113 + 14
-    } else {
-        anImgP.x = (anImgP.place - 1) * 113
-    }
-
 }
 
 function previewYHandler(anImgP) {
     anImgP.y = ((Math.floor(mousey / 120))) * 120 + 7
 }
 
+function mover(anImgP) {
+    if (anImgP.y < 847) {
+        anImgP.x = anImgP.place * 113 + 14
+        console.log(anImgP.place * 113 + 14)
+    } else {
+        anImgP.x = (anImgP.place - 1) * 113
+    }
+}
+
 
 
 requestAnimationFrame(loop);
 function loop() {
+    console.log(odP.place)
     if (followmouse === "od") {
         od.x = mousex - 56.5
         od.y = mousey - 56.5
@@ -137,20 +136,32 @@ function loop() {
         previewYHandler(damnP);
     }
 
-    imgxHandler(odP);
-    imgxHandler(s80P);
-    imgxHandler(gkmcP);
-    imgxHandler(tpabP);
-    imgxHandler(uuP);
-    imgxHandler(damnP);
-    sRow = 1;
-    aRow = 1;
-    bRow = 1;
-    cRow = 1;
-    dRow = 1;
-    eRow = 1;
-    fRow = 1;
-    bottom = -0.12;
+    
+    mover(odP);
+    mover(s80P);
+    mover(gkmcP);
+    mover(tpabP);
+    mover(uuP);
+    mover(damnP);
+
+    if (followmouse === "od") {
+        imgxHandler(odP);
+    }
+    if (followmouse === "s80") {
+        imgxHandler(s80P);
+    }
+    if (followmouse === "gkmc") {
+        imgxHandler(gkmcP);
+    }
+    if (followmouse === "tpab") {
+        imgxHandler(tpabP);
+    }
+    if (followmouse === "uu") {
+        imgxHandler(uuP);
+    }
+    if (followmouse === "damn") {
+        imgxHandler(damnP);
+    }
 
     // tier list
     ctx.fillStyle = "rgb(26, 26, 26)"
@@ -199,115 +210,6 @@ function loop() {
     ctx.drawImage(damnImg, damn.x, damn.y, damn.w, damn.h)
     ctx.drawImage(tpabImg, tpab.x, tpab.y, tpab.w, tpab.h)
 
-    // if (mousey < 127) {
-    //     whichImg(7);
-    //     if (followmouse === "od") {
-    //         odP.x = sRow * 113 + 14
-    //     } else if (followmouse === "s80") {
-    //         s80P.x = sRow * 113 + 14
-    //     } else if (followmouse === "gkmc") {
-    //         gkmcP.x = sRow * 113 + 14
-    //     } else if (followmouse === "tpab") {
-    //         tpabP.x = sRow * 113 + 14
-    //     } else if (followmouse === "uu") {
-    //         uuP.x = sRow * 113 + 14
-    //     } else if (followmouse === "damn") {
-    //         damnP.x = sRow * 113 + 14
-    //     }
-    // } else if (mousey < 247) {
-    //     whichImg(127);
-    //     if (followmouse === "od") {
-    //         odP.x = aRow * 113 + 14
-    //     } else if (followmouse === "s80") {
-    //         s80P.x = aRow * 113 + 14
-    //     } else if (followmouse === "gkmc") {
-    //         gkmcP.x = aRow * 113 + 14
-    //     } else if (followmouse === "tpab") {
-    //         tpabP.x = aRow * 113 + 14
-    //     } else if (followmouse === "uu") {
-    //         uuP.x = aRow * 113 + 14
-    //     } else if (followmouse === "damn") {
-    //         damnP.x = aRow * 113 + 14
-    //     }
-    // } else if (mousey < 367) {
-    //     whichImg(247);
-    //     if (followmouse === "od") {
-    //         odP.x = bRow * 113 + 14
-    //     } else if (followmouse === "s80") {
-    //         s80P.x = bRow * 113 + 14
-    //     } else if (followmouse === "gkmc") {
-    //         gkmcP.x = bRow * 113 + 14
-    //     } else if (followmouse === "tpab") {
-    //         tpabP.x = bRow * 113 + 14
-    //     } else if (followmouse === "uu") {
-    //         uuP.x = bRow * 113 + 14
-    //     } else if (followmouse === "damn") {
-    //         damnP.x = bRow * 113 + 14
-    //     }
-    // } else if (mousey < 487) {
-    //     whichImg(367);
-    //     if (followmouse === "od") {
-    //         odP.x = cRow * 113 + 14
-    //     } else if (followmouse === "s80") {
-    //         s80P.x = cRow * 113 + 14
-    //     } else if (followmouse === "gkmc") {
-    //         gkmcP.x = cRow * 113 + 14
-    //     } else if (followmouse === "tpab") {
-    //         tpabP.x = cRow * 113 + 14
-    //     } else if (followmouse === "uu") {
-    //         uuP.x = cRow * 113 + 14
-    //     } else if (followmouse === "damn") {
-    //         damnP.x = cRow * 113 + 14
-    //     }
-    // } else if (mousey < 607) {
-    //     whichImg(487);
-    //     if (followmouse === "od") {
-    //         odP.x = dRow * 113 + 14
-    //     } else if (followmouse === "s80") {
-    //         s80P.x = dRow * 113 + 14
-    //     } else if (followmouse === "gkmc") {
-    //         gkmcP.x = dRow * 113 + 14
-    //     } else if (followmouse === "tpab") {
-    //         tpabP.x = dRow * 113 + 14
-    //     } else if (followmouse === "uu") {
-    //         uuP.x = dRow * 113 + 14
-    //     } else if (followmouse === "damn") {
-    //         damnP.x = dRow * 113 + 14
-    //     }
-    // } else if (mousey < 727) {
-    //     whichImg(607);
-    //     if (followmouse === "od") {
-    //         odP.x = eRow * 113 + 14
-    //     } else if (followmouse === "s80") {
-    //         s80P.x = eRow * 113 + 14
-    //     } else if (followmouse === "gkmc") {
-    //         gkmcP.x = eRow * 113 + 14
-    //     } else if (followmouse === "tpab") {
-    //         tpabP.x = eRow * 113 + 14
-    //     } else if (followmouse === "uu") {
-    //         uuP.x = eRow * 113 + 14
-    //     } else if (followmouse === "damn") {
-    //         damnP.x = eRow * 113 + 14
-    //     }
-    // } else if (mousey < 847) {
-    //     whichImg(727);
-    //     if (followmouse === "od") {
-    //         odP.x = fRow * 113 + 14
-    //     } else if (followmouse === "s80") {
-    //         s80P.x = fRow * 113 + 14
-    //     } else if (followmouse === "gkmc") {
-    //         gkmcP.x = fRow * 113 + 14
-    //     } else if (followmouse === "tpab") {
-    //         tpabP.x = fRow * 113 + 14
-    //     } else if (followmouse === "uu") {
-    //         uuP.x = fRow * 113 + 14
-    //     } else if (followmouse === "damn") {
-    //         damnP.x = fRow * 113 + 14
-    //     }
-    // } else {
-    //     odP.y = -1000;
-    // }
-
     ctx.globalAlpha = 0.4
     ctx.drawImage(odImg, odP.x, odP.y, 113, 113)
     ctx.drawImage(s80Img, s80P.x, s80P.y, 113, 113)
@@ -347,71 +249,71 @@ function loop() {
     requestAnimationFrame(loop);
 }
 
-// function whichImg(num) {
-//     if (followmouse === "od") {
-//         odP.y = num;
-//     }
-//     if (followmouse === "s80") {
-//         s80P.y = num;
-//     }
-//     if (followmouse === "gkmc") {
-//         gkmcP.y = num;
-//     }
-//     if (followmouse === "tpab") {
-//         tpabP.y = num;
-//     }
-//     if (followmouse === "uu") {
-//         uuP.y = num;
-//     }
-//     if (followmouse === "damn") {
-//         damnP.y = num;
-//     }
-// }
-
 // event listrebnersd
 document.addEventListener("mousemove", mousemovemanager);
 document.addEventListener("mousedown", mousedownmanager);
 document.addEventListener("mouseup", mouseupmanager);
 
+function whenthemousegoesup(anImgP) {
+    if (anImgP.row === "S") {
+        sRow++;
+    } else if (anImgP.row === "A") {
+        aRow++;
+    } else if (anImgP.row === "B") {
+        bRow++;
+    } else if (anImgP.row === "C") {
+        cRow++;
+    } else if (anImgP.row === "D") {
+        dRow++;
+    } else if (anImgP.row === "E") {
+        eRow++;
+    } else if (anImgP.row === "F") {
+        fRow++;
+    } else {
+        bottom++;
+    }
+}
+
+function whenthemousegoesdown(anImgP) {
+    if (anImgP.row === "S") {
+        sRow--;
+    } else if (anImgP.row === "A") {
+        aRow--;
+    } else if (anImgP.row === "B") {
+        bRow--;
+    } else if (anImgP.row === "C") {
+        cRow--;
+    } else if (anImgP.row === "D") {
+        dRow--;
+    } else if (anImgP.row === "E") {
+        eRow--;
+    } else if (anImgP.row === "F") {
+        fRow--;
+    } else {
+        bottom--;
+    }
+}
+
+
 function mouseupmanager() {
-    // if (followmouse === "od") {
-    //     od.x = odP.x
-    //     od.y = odP.y
-    // } else if (followmouse === "s80") {
-    //     s80.x = s80P.x
-    //     s80.y = s80P.y
-    // } else if (followmouse === "gkmc") {
-    //     gkmc.x = gkmcP.x
-    //     gkmc.y = gkmcP.y
-    // } else if (followmouse === "tpab") {
-    //     tpab.x = tpabP.x
-    //     tpab.y = tpabP.y
-    // } else if (followmouse === "uu") {
-    //     uu.x = uuP.x
-    //     uu.y = uuP.y
-    // } else if (followmouse === "damn") {
-    //     damn.x = damnP.x
-    //     damn.y = damnP.y
-    // }
-    // if (followmouse != "none") {
-    //     if (mousey < 127) {
-    //         sRow++;
-    //     } else if (mousey < 247) {
-    //         aRow++;
-    //     } else if (mousey < 367) {
-    //         bRow++;
-    //     } else if (mousey < 487) {
-    //         cRow++;
-    //     } else if (mousey < 607) {
-    //         dRow++;
-    //     } else if (mousey < 727) {
-    //         eRow++;
-    //     } else if (mousey < 847) {
-    //         fRow++;
-    //     } else {
-    //         bottom++;
-    //     }
-    // }
+    if (followmouse === "od") {
+        whenthemousegoesup(odP);
+    }
+    if (followmouse === "s80") {
+        whenthemousegoesup(s80P);
+    }
+    if (followmouse === "gkmc") {
+        whenthemousegoesup(gkmcP);
+    }
+    if (followmouse === "tpab") {
+        whenthemousegoesup(tpabP);
+    }
+    if (followmouse === "uu") {
+        whenthemousegoesup(uuP);
+    }
+    if (followmouse === "damn") {
+        whenthemousegoesup(damnP);
+    }
     followmouse = "none"
     mouseisclicked = false;
 }
@@ -420,7 +322,6 @@ function mousedownmanager() {
     mouseisclicked = true;
     if (mouseisclicked && mousex > od.x && mousex < od.x + 113 && mousey > od.y && mousey < od.y + 113) {
         followmouse = "od"
-        console.log("yee")
     }
     if (mouseisclicked && mousex > s80.x && mousex < s80.x + 113 && mousey > s80.y && mousey < s80.y + 113) {
         followmouse = "s80"
@@ -436,6 +337,24 @@ function mousedownmanager() {
     }
     if (mouseisclicked && mousex > damn.x && mousex < damn.x + 113 && mousey > damn.y && mousey < damn.y + 113) {
         followmouse = "damn"
+    }
+    if (followmouse === "od") {
+        whenthemousegoesdown(odP);
+    }
+    if (followmouse === "s80") {
+        whenthemousegoesdown(s80P);
+    }
+    if (followmouse === "gkmc") {
+        whenthemousegoesdown(gkmcP);
+    }
+    if (followmouse === "tpab") {
+        whenthemousegoesdown(tpabP);
+    }
+    if (followmouse === "uu") {
+        whenthemousegoesdown(uuP);
+    }
+    if (followmouse === "damn") {
+        whenthemousegoesdown(damnP);
     }
 }
 
