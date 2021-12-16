@@ -94,17 +94,13 @@ function previewYHandler(anImgP) {
 function mover(anImgP) {
     if (anImgP.y < 847) {
         anImgP.x = anImgP.place * 113 + 14
-        console.log(anImgP.place * 113 + 14)
     } else {
         anImgP.x = (anImgP.place - 1) * 113
     }
 }
 
-
-
 requestAnimationFrame(loop);
 function loop() {
-    console.log(odP.place)
     if (followmouse === "od") {
         od.x = mousex - 56.5
         od.y = mousey - 56.5
@@ -136,7 +132,6 @@ function loop() {
         previewYHandler(damnP);
     }
 
-    
     mover(odP);
     mover(s80P);
     mover(gkmcP);
@@ -245,7 +240,6 @@ function loop() {
             damn.y = damnP.y
         }
     }
-
     requestAnimationFrame(loop);
 }
 
