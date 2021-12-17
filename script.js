@@ -25,14 +25,14 @@ let fRow = 1;
 let bottom = 1;
 let imgEdge;
 
-function newImg(x, y, w, h, row, place) {
+function newImg(x, y, w, h, row, stay) {
     return {
         x: x,
         y: y,
         w: w,
         h: h,
         row: row,
-        place: place
+        stay: stay
     }
 }
 
@@ -42,12 +42,12 @@ let gkmc = newImg(226, 847, 113, 113)
 let tpab = newImg(339, 847, 113, 113)
 let uu = newImg(452, 847, 113, 113)
 let damn = newImg(565, 847, 113, 113)
-let odP = newImg(0, 847, 113, 113, "bottom", 1)
-let s80P = newImg(113, 847, 113, 113, "bottom", 2)
-let gkmcP = newImg(226, 847, 113, 113, "bottom", 3)
-let tpabP = newImg(339, 847, 113, 113, "bottom", 4)
-let uuP = newImg(452, 847, 113, 113, "bottom", 5)
-let damnP = newImg(565, 847, 113, 113, "bottom", 6)
+let odP = newImg(0, 847, 113, 113, "bottom", true);
+let s80P = newImg(113, 847, 113, 113, "bottom", true);
+let gkmcP = newImg(226, 847, 113, 113, "bottom", true);
+let tpabP = newImg(339, 847, 113, 113, "bottom", true);
+let uuP = newImg(452, 847, 113, 113, "bottom", true);
+let damnP = newImg(565, 847, 113, 113, "bottom", true);
 
 function imgxHandler(anImgP) {
     if (anImgP.y < 127) {
@@ -67,24 +67,6 @@ function imgxHandler(anImgP) {
     } else {
         anImgP.row = "bottom"
     }
-
-    if (anImgP.row === "S") {
-        anImgP.place = sRow
-    } else if (anImgP.row === "A") {
-        anImgP.place = aRow
-    } else if (anImgP.row === "B") {
-        anImgP.place = bRow
-    } else if (anImgP.row === "C") {
-        anImgP.place = cRow
-    } else if (anImgP.row === "D") {
-        anImgP.place = dRow
-    } else if (anImgP.row === "E") {
-        anImgP.place = eRow
-    } else if (anImgP.row === "F") {
-        anImgP.place = fRow
-    } else if (anImgP.row === "bottom") {
-        bottom++;
-    }
 }
 
 function previewYHandler(anImgP) {
@@ -92,11 +74,23 @@ function previewYHandler(anImgP) {
 }
 
 function mover(anImgP) {
-    if (anImgP.y < 847) {
-        anImgP.x = anImgP.place * 113 + 14
+    if (anImgP.row === "bottom" && anImgP.x === 0) {
+        anImgP.stay = true;
+    } else if (anImgP.x === 127) {
+        anImgP.stay = true;
+    } else if (anImgP.x === odP.x + odP.w && anImgP.row === odP.row || anImgP.x === s80P.x + s80P.w || anImgP.x === gkmcP.x + gkmcP.w || anImgP.x === tpabP.x + tpabP.w || anImgP.x === uuP.x + uuP.w || anImgP.x === damnP.x + damnP.w) {
+        anImgP.stay = true;
     } else {
-        anImgP.x = (anImgP.place - 1) * 113
+        anImgP.stay = false;
     }
+
+    if (anImgP.stay === false) {
+        if (anImgP.x < 127 && anImgP.row != "bottom") {
+            anImgP.x = 805;
+        }
+        anImgP.x -= 113;
+    }
+    console.log(anImgP.stay)
 }
 
 requestAnimationFrame(loop);
