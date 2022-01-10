@@ -25,31 +25,33 @@ let fRow = 1;
 let bottom = 1;
 let imgEdge;
 
-function newImg(x, y, w, h, row, stay) {
+function newImg(x, y, w, h, row, prow, stay) {
     return {
         x: x,
         y: y,
         w: w,
         h: h,
         row: row,
+        prow: prow,
         stay: stay
     }
 }
 
-let od = newImg(0, 847, 113, 113)
-let s80 = newImg(113, 847, 113, 113)
-let gkmc = newImg(226, 847, 113, 113)
-let tpab = newImg(339, 847, 113, 113)
-let uu = newImg(452, 847, 113, 113)
-let damn = newImg(565, 847, 113, 113)
-let odP = newImg(0, 847, 113, 113, "bottom", true);
-let s80P = newImg(113, 847, 113, 113, "bottom", true);
-let gkmcP = newImg(226, 847, 113, 113, "bottom", true);
-let tpabP = newImg(339, 847, 113, 113, "bottom", true);
-let uuP = newImg(452, 847, 113, 113, "bottom", true);
-let damnP = newImg(565, 847, 113, 113, "bottom", true);
+let od = newImg(127, 847, 113, 113)
+let s80 = newImg(240, 847, 113, 113)
+let gkmc = newImg(353, 847, 113, 113)
+let tpab = newImg(466, 847, 113, 113)
+let uu = newImg(579, 847, 113, 113)
+let damn = newImg(692, 847, 113, 113)
+let odP = newImg(127, 847, 113, 113, "bottom", true);
+let s80P = newImg(240, 847, 113, 113, "bottom", true);
+let gkmcP = newImg(353, 847, 113, 113, "bottom", true);
+let tpabP = newImg(466, 847, 113, 113, "bottom", true);
+let uuP = newImg(579, 847, 113, 113, "bottom", true);
+let damnP = newImg(692, 847, 113, 113, "bottom", true);
 
 function imgxHandler(anImgP) {
+    anImgP.prow = anImgP.row; 
     if (anImgP.y < 127) {
         anImgP.row = "S"
     } else if (anImgP.y < 247) {
@@ -74,23 +76,18 @@ function previewYHandler(anImgP) {
 }
 
 function mover(anImgP) {
-    if (anImgP.row === "bottom" && anImgP.x === 0) {
+    if (anImgP.row === "bottom") {
         anImgP.stay = true;
     } else if (anImgP.x === 127) {
         anImgP.stay = true;
-    } else if (anImgP.x === odP.x + odP.w && anImgP.row === odP.row || anImgP.x === s80P.x + s80P.w || anImgP.x === gkmcP.x + gkmcP.w || anImgP.x === tpabP.x + tpabP.w || anImgP.x === uuP.x + uuP.w || anImgP.x === damnP.x + damnP.w) {
+    } else if ((anImgP.x === odP.x + odP.w && anImgP.row === odP.row) || (anImgP.x === s80P.x + s80P.w && anImgP.row === s80P.row) || (anImgP.x === gkmcP.x + gkmcP.w && anImgP.row === gkmcP.row) || (anImgP.x === tpabP.x + tpabP.w && anImgP.row === tpabP.row) || (anImgP.x === uuP.x + uuP.w && anImgP.row === uuP.row) || (anImgP.x === damnP.x + damnP.w && anImgP.row === damnP.row)) {
         anImgP.stay = true;
     } else {
         anImgP.stay = false;
     }
-
     if (anImgP.stay === false) {
-        if (anImgP.x < 127 && anImgP.row != "bottom") {
-            anImgP.x = 805;
-        }
         anImgP.x -= 113;
     }
-    console.log(anImgP.stay)
 }
 
 requestAnimationFrame(loop);
@@ -180,7 +177,7 @@ function loop() {
     ctx.fillText("D", 45, 560)
     ctx.fillText("E", 45, 680)
     ctx.fillText("F", 45, 800)
-
+    console.log("row: " + odP.row, "prow: " + odP.prow)
     for (let y = 0; y <= 847; y += 120) {
         ctx.fillRect(0, y, 1300, 7)
         for (let x = 0; x <= 125; x += 120) {
