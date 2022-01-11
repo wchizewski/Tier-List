@@ -25,15 +25,15 @@ let fRow = 1;
 let bottom = 1;
 let imgEdge;
 
-function newImg(x, y, w, h, row, prow, stay) {
+function newImg(x, y, w, h, row, stay, prow) {
     return {
         x: x,
         y: y,
         w: w,
         h: h,
         row: row,
+        stay: stay,
         prow: prow,
-        stay: stay
     }
 }
 
@@ -43,15 +43,15 @@ let gkmc = newImg(353, 847, 113, 113)
 let tpab = newImg(466, 847, 113, 113)
 let uu = newImg(579, 847, 113, 113)
 let damn = newImg(692, 847, 113, 113)
-let odP = newImg(127, 847, 113, 113, "bottom", true);
-let s80P = newImg(240, 847, 113, 113, "bottom", true);
-let gkmcP = newImg(353, 847, 113, 113, "bottom", true);
-let tpabP = newImg(466, 847, 113, 113, "bottom", true);
-let uuP = newImg(579, 847, 113, 113, "bottom", true);
-let damnP = newImg(692, 847, 113, 113, "bottom", true);
+let odP = newImg(127, 847, 113, 113, "bottom", true, "bottom");
+let s80P = newImg(240, 847, 113, 113, "bottom", true, "bottom");
+let gkmcP = newImg(353, 847, 113, 113, "bottom", true, "bottom");
+let tpabP = newImg(466, 847, 113, 113, "bottom", true, "bottom");
+let uuP = newImg(579, 847, 113, 113, "bottom", true, "bottom");
+let damnP = newImg(692, 847, 113, 113, "bottom", true, "bottom");
 
 function imgxHandler(anImgP) {
-    anImgP.prow = anImgP.row; 
+    anImgP.prow = anImgP.row;
     if (anImgP.y < 127) {
         anImgP.row = "S"
     } else if (anImgP.y < 247) {
@@ -76,17 +76,26 @@ function previewYHandler(anImgP) {
 }
 
 function mover(anImgP) {
+    // if (anImgP.prow != anImgP.row) {
+    //     anImgP.x = 805
+    // }
     if (anImgP.row === "bottom") {
         anImgP.stay = true;
     } else if (anImgP.x === 127) {
         anImgP.stay = true;
     } else if ((anImgP.x === odP.x + odP.w && anImgP.row === odP.row) || (anImgP.x === s80P.x + s80P.w && anImgP.row === s80P.row) || (anImgP.x === gkmcP.x + gkmcP.w && anImgP.row === gkmcP.row) || (anImgP.x === tpabP.x + tpabP.w && anImgP.row === tpabP.row) || (anImgP.x === uuP.x + uuP.w && anImgP.row === uuP.row) || (anImgP.x === damnP.x + damnP.w && anImgP.row === damnP.row)) {
         anImgP.stay = true;
+    } else if (anImgP.prow != anImgP.row) {
+        anImgP.x = 805
     } else {
         anImgP.stay = false;
     }
-    if (anImgP.stay === false) {
+    while (anImgP.stay === false) {
         anImgP.x -= 113;
+        if (anImgP.x <= 127) {
+            anImgP.x = 127;
+            anImgP.stay = true;
+        }
     }
 }
 
@@ -149,6 +158,7 @@ function loop() {
         imgxHandler(damnP);
     }
 
+
     // tier list
     ctx.fillStyle = "rgb(26, 26, 26)"
     ctx.fillRect(127, 7, 1167, 840)
@@ -177,7 +187,9 @@ function loop() {
     ctx.fillText("D", 45, 560)
     ctx.fillText("E", 45, 680)
     ctx.fillText("F", 45, 800)
+
     console.log("row: " + odP.row, "prow: " + odP.prow)
+
     for (let y = 0; y <= 847; y += 120) {
         ctx.fillRect(0, y, 1300, 7)
         for (let x = 0; x <= 125; x += 120) {
