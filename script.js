@@ -37,12 +37,12 @@ function newImg(x, y, w, h, row, stay, prow) {
     }
 }
 
-let od = newImg(127, 847, 113, 113)
-let s80 = newImg(240, 847, 113, 113)
-let gkmc = newImg(353, 847, 113, 113)
-let tpab = newImg(466, 847, 113, 113)
-let uu = newImg(579, 847, 113, 113)
-let damn = newImg(692, 847, 113, 113)
+let od = newImg(127, 847, 113, 113);
+let s80 = newImg(240, 847, 113, 113);
+let gkmc = newImg(353, 847, 113, 113);
+let tpab = newImg(466, 847, 113, 113);
+let uu = newImg(579, 847, 113, 113);
+let damn = newImg(692, 847, 113, 113);
 let odP = newImg(127, 847, 113, 113, "bottom", true, "bottom");
 let s80P = newImg(240, 847, 113, 113, "bottom", true, "bottom");
 let gkmcP = newImg(353, 847, 113, 113, "bottom", true, "bottom");
@@ -69,6 +69,7 @@ function imgxHandler(anImgP) {
     } else {
         anImgP.row = "bottom"
     }
+    console.log(odP.stay)
 }
 
 function previewYHandler(anImgP) {
@@ -76,59 +77,57 @@ function previewYHandler(anImgP) {
 }
 
 function mover(anImgP) {
-    // if (anImgP.prow != anImgP.row) {
-    //     anImgP.x = 805
-    // }
-    if (anImgP.row === "bottom") {
+    if (anImgP.prow != anImgP.row) {
+        anImgP.x = 805;
+    }
+    if ((anImgP.x === odP.x + odP.w && anImgP.row === odP.row) || (anImgP.x === s80P.x + s80P.w && anImgP.row === s80P.row) || (anImgP.x === gkmcP.x + gkmcP.w && anImgP.row === gkmcP.row) || (anImgP.x === tpabP.x + tpabP.w && anImgP.row === tpabP.row) || (anImgP.x === uuP.x + uuP.w && anImgP.row === uuP.row) || (anImgP.x === damnP.x + damnP.w && anImgP.row === damnP.row)) {
         anImgP.stay = true;
-    } else if (anImgP.x === 127) {
-        anImgP.stay = true;
-    } else if ((anImgP.x === odP.x + odP.w && anImgP.row === odP.row) || (anImgP.x === s80P.x + s80P.w && anImgP.row === s80P.row) || (anImgP.x === gkmcP.x + gkmcP.w && anImgP.row === gkmcP.row) || (anImgP.x === tpabP.x + tpabP.w && anImgP.row === tpabP.row) || (anImgP.x === uuP.x + uuP.w && anImgP.row === uuP.row) || (anImgP.x === damnP.x + damnP.w && anImgP.row === damnP.row)) {
-        anImgP.stay = true;
-    } else if (anImgP.prow != anImgP.row) {
-        anImgP.x = 805
     } else {
         anImgP.stay = false;
     }
     while (anImgP.stay === false) {
         anImgP.x -= 113;
-        if (anImgP.x <= 127) {
-            anImgP.x = 127;
-            anImgP.stay = true;
-        }
+        anImgP.stay = true;
     }
+    if (anImgP.x <= 127) {
+        anImgP.x = 127;
+        anImgP.stay = true;
+    }
+    // if (anImgP.x != 127 || (anImgP.row === od.row && anImgP.x != od.x + 113) || (anImgP.row === s80.row && anImgP.x != s80.x + 113) || (anImgP.row === gkmc.row && anImgP.x != gkmc.x + 113) || (anImgP.row === tpab.row && anImgP.x != tpab.x + 113) || (anImgP.row === uu.row && anImgP.x != uu.x + 113) || (anImgP.row === damn.row && anImgP.x != damn.x + 113)) {
+    //     console.log("it works")
+    // }
 }
 
 requestAnimationFrame(loop);
 function loop() {
     if (followmouse === "od") {
-        od.x = mousex - 56.5
-        od.y = mousey - 56.5
+        od.x = mousex - 56.5;
+        od.y = mousey - 56.5;
         previewYHandler(odP);
     }
     if (followmouse === "s80") {
-        s80.x = mousex - 56.5
-        s80.y = mousey - 56.5
+        s80.x = mousex - 56.5;
+        s80.y = mousey - 56.5;
         previewYHandler(s80P);
     }
     if (followmouse === "gkmc") {
-        gkmc.x = mousex - 56.5
-        gkmc.y = mousey - 56.5
+        gkmc.x = mousex - 56.5;
+        gkmc.y = mousey - 56.5;
         previewYHandler(gkmcP);
     }
     if (followmouse === "tpab") {
-        tpab.x = mousex - 56.5
-        tpab.y = mousey - 56.5
+        tpab.x = mousex - 56.5;
+        tpab.y = mousey - 56.5;
         previewYHandler(tpabP);
     }
     if (followmouse === "uu") {
-        uu.x = mousex - 56.5
-        uu.y = mousey - 56.5
+        uu.x = mousex - 56.5;
+        uu.y = mousey - 56.5;
         previewYHandler(uuP);
     }
     if (followmouse === "damn") {
-        damn.x = mousex - 56.5
-        damn.y = mousey - 56.5
+        damn.x = mousex - 56.5;
+        damn.y = mousey - 56.5;
         previewYHandler(damnP);
     }
 
@@ -160,87 +159,87 @@ function loop() {
 
 
     // tier list
-    ctx.fillStyle = "rgb(26, 26, 26)"
-    ctx.fillRect(127, 7, 1167, 840)
+    ctx.fillStyle = "rgb(26, 26, 26)";
+    ctx.fillRect(127, 7, 1167, 840);
 
-    ctx.fillStyle = "rgb(255, 127, 127)"
-    ctx.fillRect(7, 7, 120, 120)
-    ctx.fillStyle = "rgb(255, 191, 127)"
-    ctx.fillRect(7, 127, 120, 120)
-    ctx.fillStyle = "rgb(255, 255, 127)"
-    ctx.fillRect(7, 247, 120, 120)
-    ctx.fillStyle = "rgb(127, 255, 127)"
-    ctx.fillRect(7, 367, 120, 120)
-    ctx.fillStyle = "rgb(127, 191, 255)"
-    ctx.fillRect(7, 487, 120, 120)
-    ctx.fillStyle = "rgb(127, 127, 255)"
-    ctx.fillRect(7, 607, 120, 120)
-    ctx.fillStyle = "rgb(255, 127, 255)"
-    ctx.fillRect(7, 727, 120, 120)
+    ctx.fillStyle = "rgb(255, 127, 127)";
+    ctx.fillRect(7, 7, 120, 120);
+    ctx.fillStyle = "rgb(255, 191, 127)";
+    ctx.fillRect(7, 127, 120, 120);
+    ctx.fillStyle = "rgb(255, 255, 127)";
+    ctx.fillRect(7, 247, 120, 120);
+    ctx.fillStyle = "rgb(127, 255, 127)";
+    ctx.fillRect(7, 367, 120, 120);
+    ctx.fillStyle = "rgb(127, 191, 255)";
+    ctx.fillRect(7, 487, 120, 120);
+    ctx.fillStyle = "rgb(127, 127, 255)";
+    ctx.fillRect(7, 607, 120, 120);
+    ctx.fillStyle = "rgb(255, 127, 255)";
+    ctx.fillRect(7, 727, 120, 120);
 
-    ctx.font = "55px Arial"
-    ctx.fillStyle = "black"
-    ctx.fillText("S", 45, 80)
-    ctx.fillText("A", 45, 200)
-    ctx.fillText("B", 45, 320)
-    ctx.fillText("C", 45, 440)
-    ctx.fillText("D", 45, 560)
-    ctx.fillText("E", 45, 680)
-    ctx.fillText("F", 45, 800)
+    ctx.font = "55px Arial";
+    ctx.fillStyle = "black";
+    ctx.fillText("S", 45, 80);
+    ctx.fillText("A", 45, 200);
+    ctx.fillText("B", 45, 320);
+    ctx.fillText("C", 45, 440);
+    ctx.fillText("D", 45, 560);
+    ctx.fillText("E", 45, 680);
+    ctx.fillText("F", 45, 800);
 
     console.log("row: " + odP.row, "prow: " + odP.prow)
 
     for (let y = 0; y <= 847; y += 120) {
-        ctx.fillRect(0, y, 1300, 7)
+        ctx.fillRect(0, y, 1300, 7);
         for (let x = 0; x <= 125; x += 120) {
-            ctx.fillRect(x, 0, 7, 847)
+            ctx.fillRect(x, 0, 7, 847);
         }
     }
-    ctx.fillRect(1293, 0, 7, 847)
-    ctx.fillStyle = "lightblue"
-    ctx.fillRect(0, 847, 1300, 153)
+    ctx.fillRect(1293, 0, 7, 847);
+    ctx.fillStyle = "lightblue";
+    ctx.fillRect(0, 847, 1300, 153);
 
     // draw images
-    ctx.drawImage(odImg, od.x, od.y, od.w, od.h)
-    ctx.drawImage(s80Img, s80.x, s80.y, s80.w, s80.h)
-    ctx.drawImage(gkmcImg, gkmc.x, gkmc.y, gkmc.w, gkmc.h)
-    ctx.drawImage(uuImg, uu.x, uu.y, uu.w, uu.h)
-    ctx.drawImage(damnImg, damn.x, damn.y, damn.w, damn.h)
+    ctx.drawImage(odImg, od.x, od.y, od.w, od.h);
+    ctx.drawImage(s80Img, s80.x, s80.y, s80.w, s80.h);
+    ctx.drawImage(gkmcImg, gkmc.x, gkmc.y, gkmc.w, gkmc.h);
+    ctx.drawImage(uuImg, uu.x, uu.y, uu.w, uu.h);
+    ctx.drawImage(damnImg, damn.x, damn.y, damn.w, damn.h);
     ctx.drawImage(tpabImg, tpab.x, tpab.y, tpab.w, tpab.h)
 
-    ctx.globalAlpha = 0.4
-    ctx.drawImage(odImg, odP.x, odP.y, 113, 113)
-    ctx.drawImage(s80Img, s80P.x, s80P.y, 113, 113)
-    ctx.drawImage(gkmcImg, gkmcP.x, gkmcP.y, 113, 113)
-    ctx.drawImage(uuImg, uuP.x, uuP.y, 113, 113)
-    ctx.drawImage(damnImg, damnP.x, damnP.y, 113, 113)
-    ctx.drawImage(tpabImg, tpabP.x, tpabP.y, 113, 113)
-    ctx.globalAlpha = 1
+    ctx.globalAlpha = 0.4;
+    ctx.drawImage(odImg, odP.x, odP.y, 113, 113);
+    ctx.drawImage(s80Img, s80P.x, s80P.y, 113, 113);
+    ctx.drawImage(gkmcImg, gkmcP.x, gkmcP.y, 113, 113);
+    ctx.drawImage(uuImg, uuP.x, uuP.y, 113, 113);
+    ctx.drawImage(damnImg, damnP.x, damnP.y, 113, 113);
+    ctx.drawImage(tpabImg, tpabP.x, tpabP.y, 113, 113);
+    ctx.globalAlpha = 1;
 
     if (!mouseisclicked) {
         if (followmouse != "od") {
-            od.x = odP.x
-            od.y = odP.y
+            od.x = odP.x;
+            od.y = odP.y;
         }
         if (followmouse != "s80") {
-            s80.x = s80P.x
-            s80.y = s80P.y
+            s80.x = s80P.x;
+            s80.y = s80P.y;
         }
         if (followmouse != "gkmc") {
-            gkmc.x = gkmcP.x
-            gkmc.y = gkmcP.y
+            gkmc.x = gkmcP.x;
+            gkmc.y = gkmcP.y;
         }
         if (followmouse != "tpab") {
-            tpab.x = tpabP.x
-            tpab.y = tpabP.y
+            tpab.x = tpabP.x;
+            tpab.y = tpabP.y;
         }
         if (followmouse != "uu") {
-            uu.x = uuP.x
-            uu.y = uuP.y
+            uu.x = uuP.x;
+            uu.y = uuP.y;
         }
         if (followmouse != "damn") {
-            damn.x = damnP.x
-            damn.y = damnP.y
+            damn.x = damnP.x;
+            damn.y = damnP.y;
         }
     }
     requestAnimationFrame(loop);
@@ -251,66 +250,7 @@ document.addEventListener("mousemove", mousemovemanager);
 document.addEventListener("mousedown", mousedownmanager);
 document.addEventListener("mouseup", mouseupmanager);
 
-function whenthemousegoesup(anImgP) {
-    if (anImgP.row === "S") {
-        sRow++;
-    } else if (anImgP.row === "A") {
-        aRow++;
-    } else if (anImgP.row === "B") {
-        bRow++;
-    } else if (anImgP.row === "C") {
-        cRow++;
-    } else if (anImgP.row === "D") {
-        dRow++;
-    } else if (anImgP.row === "E") {
-        eRow++;
-    } else if (anImgP.row === "F") {
-        fRow++;
-    } else {
-        bottom++;
-    }
-}
-
-function whenthemousegoesdown(anImgP) {
-    if (anImgP.row === "S") {
-        sRow--;
-    } else if (anImgP.row === "A") {
-        aRow--;
-    } else if (anImgP.row === "B") {
-        bRow--;
-    } else if (anImgP.row === "C") {
-        cRow--;
-    } else if (anImgP.row === "D") {
-        dRow--;
-    } else if (anImgP.row === "E") {
-        eRow--;
-    } else if (anImgP.row === "F") {
-        fRow--;
-    } else {
-        bottom--;
-    }
-}
-
-
 function mouseupmanager() {
-    if (followmouse === "od") {
-        whenthemousegoesup(odP);
-    }
-    if (followmouse === "s80") {
-        whenthemousegoesup(s80P);
-    }
-    if (followmouse === "gkmc") {
-        whenthemousegoesup(gkmcP);
-    }
-    if (followmouse === "tpab") {
-        whenthemousegoesup(tpabP);
-    }
-    if (followmouse === "uu") {
-        whenthemousegoesup(uuP);
-    }
-    if (followmouse === "damn") {
-        whenthemousegoesup(damnP);
-    }
     followmouse = "none"
     mouseisclicked = false;
 }
@@ -318,45 +258,27 @@ function mouseupmanager() {
 function mousedownmanager() {
     mouseisclicked = true;
     if (mouseisclicked && mousex > od.x && mousex < od.x + 113 && mousey > od.y && mousey < od.y + 113) {
-        followmouse = "od"
+        followmouse = "od";
     }
     if (mouseisclicked && mousex > s80.x && mousex < s80.x + 113 && mousey > s80.y && mousey < s80.y + 113) {
-        followmouse = "s80"
+        followmouse = "s80";
     }
     if (mouseisclicked && mousex > gkmc.x && mousex < gkmc.x + 113 && mousey > gkmc.y && mousey < gkmc.y + 113) {
-        followmouse = "gkmc"
+        followmouse = "gkmc";
     }
     if (mouseisclicked && mousex > tpab.x && mousex < tpab.x + 113 && mousey > tpab.y && mousey < tpab.y + 113) {
-        followmouse = "tpab"
+        followmouse = "tpab";
     }
     if (mouseisclicked && mousex > uu.x && mousex < uu.x + 113 && mousey > uu.y && mousey < uu.y + 113) {
-        followmouse = "uu"
+        followmouse = "uu";
     }
     if (mouseisclicked && mousex > damn.x && mousex < damn.x + 113 && mousey > damn.y && mousey < damn.y + 113) {
-        followmouse = "damn"
-    }
-    if (followmouse === "od") {
-        whenthemousegoesdown(odP);
-    }
-    if (followmouse === "s80") {
-        whenthemousegoesdown(s80P);
-    }
-    if (followmouse === "gkmc") {
-        whenthemousegoesdown(gkmcP);
-    }
-    if (followmouse === "tpab") {
-        whenthemousegoesdown(tpabP);
-    }
-    if (followmouse === "uu") {
-        whenthemousegoesdown(uuP);
-    }
-    if (followmouse === "damn") {
-        whenthemousegoesdown(damnP);
+        followmouse = "damn";
     }
 }
 
 function mousemovemanager(event) {
     let cnvRect = cnv.getBoundingClientRect();
-    mousex = event.x - cnvRect.x
-    mousey = event.y - cnvRect.y
+    mousex = event.x - cnvRect.x;
+    mousey = event.y - cnvRect.y;
 }
