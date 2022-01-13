@@ -10,7 +10,7 @@ let odImg = document.getElementById("overlydedicated");
 let s80Img = document.getElementById("section.80");
 let gkmcImg = document.getElementById("goodkidmadcity");
 let tpabImg = document.getElementById("topimpabutterfly");
-let uuImg = document.getElementById("untitledunmastered")
+let uuImg = document.getElementById("untitledunmastered");
 let damnImg = document.getElementById("damn");
 let mousex, mousey;
 let mouseisclicked;
@@ -24,6 +24,7 @@ let eRow = 1;
 let fRow = 1;
 let bottom = 1;
 let imgEdge;
+let opacity = 0.4;
 
 function newImg(x, y, w, h, row, stay, prow) {
     return {
@@ -84,18 +85,21 @@ function mover(anImgP) {
         anImgP.stay = true;
     } else {
         anImgP.stay = false;
+        console.log(anImgP.stay)
     }
     while (anImgP.stay === false) {
         anImgP.x -= 113;
         anImgP.stay = true;
+        if (anImgP.x <= 127) {
+            anImgP.x = 127;
+            anImgP.stay = true;
+        }
     }
-    if (anImgP.x <= 127) {
-        anImgP.x = 127;
-        anImgP.stay = true;
+    if (anImgP.x != 127 || (anImgP.row === od.row && anImgP.x != od.x + 113) || (anImgP.row === s80.row && anImgP.x != s80.x + 113) || (anImgP.row === gkmc.row && anImgP.x != gkmc.x + 113) || (anImgP.row === tpab.row && anImgP.x != tpab.x + 113) || (anImgP.row === uu.row && anImgP.x != uu.x + 113) || (anImgP.row === damn.row && anImgP.x != damn.x + 113)) {
+        opacity = 0;
+    } else {
+        opacity = 0.4;
     }
-    // if (anImgP.x != 127 || (anImgP.row === od.row && anImgP.x != od.x + 113) || (anImgP.row === s80.row && anImgP.x != s80.x + 113) || (anImgP.row === gkmc.row && anImgP.x != gkmc.x + 113) || (anImgP.row === tpab.row && anImgP.x != tpab.x + 113) || (anImgP.row === uu.row && anImgP.x != uu.x + 113) || (anImgP.row === damn.row && anImgP.x != damn.x + 113)) {
-    //     console.log("it works")
-    // }
 }
 
 requestAnimationFrame(loop);
@@ -187,8 +191,6 @@ function loop() {
     ctx.fillText("E", 45, 680);
     ctx.fillText("F", 45, 800);
 
-    console.log("row: " + odP.row, "prow: " + odP.prow)
-
     for (let y = 0; y <= 847; y += 120) {
         ctx.fillRect(0, y, 1300, 7);
         for (let x = 0; x <= 125; x += 120) {
@@ -207,7 +209,7 @@ function loop() {
     ctx.drawImage(damnImg, damn.x, damn.y, damn.w, damn.h);
     ctx.drawImage(tpabImg, tpab.x, tpab.y, tpab.w, tpab.h)
 
-    ctx.globalAlpha = 0.4;
+    ctx.globalAlpha = opacity;
     ctx.drawImage(odImg, odP.x, odP.y, 113, 113);
     ctx.drawImage(s80Img, s80P.x, s80P.y, 113, 113);
     ctx.drawImage(gkmcImg, gkmcP.x, gkmcP.y, 113, 113);
@@ -215,6 +217,7 @@ function loop() {
     ctx.drawImage(damnImg, damnP.x, damnP.y, 113, 113);
     ctx.drawImage(tpabImg, tpabP.x, tpabP.y, 113, 113);
     ctx.globalAlpha = 1;
+
 
     if (!mouseisclicked) {
         if (followmouse != "od") {
