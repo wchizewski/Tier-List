@@ -24,7 +24,6 @@ let eRow = 1;
 let fRow = 1;
 let bottom = 1;
 let imgEdge;
-let opacity = 0.4;
 
 function newImg(x, y, w, h, row, stay, prow) {
     return {
@@ -70,7 +69,6 @@ function imgxHandler(anImgP) {
     } else {
         anImgP.row = "bottom"
     }
-    console.log(odP.stay)
 }
 
 function previewYHandler(anImgP) {
@@ -78,28 +76,27 @@ function previewYHandler(anImgP) {
 }
 
 function mover(anImgP) {
-    if (anImgP.prow != anImgP.row) {
-        anImgP.x = 805;
-    }
     if ((anImgP.x === odP.x + odP.w && anImgP.row === odP.row) || (anImgP.x === s80P.x + s80P.w && anImgP.row === s80P.row) || (anImgP.x === gkmcP.x + gkmcP.w && anImgP.row === gkmcP.row) || (anImgP.x === tpabP.x + tpabP.w && anImgP.row === tpabP.row) || (anImgP.x === uuP.x + uuP.w && anImgP.row === uuP.row) || (anImgP.x === damnP.x + damnP.w && anImgP.row === damnP.row)) {
         anImgP.stay = true;
     } else {
         anImgP.stay = false;
-        console.log(anImgP.stay)
+    }
+    if (anImgP.prow != anImgP.row) {
+        anImgP.x = 805;
+        anImgP.stay = false
     }
     while (anImgP.stay === false) {
         anImgP.x -= 113;
-        anImgP.stay = true;
-        if (anImgP.x <= 127) {
+        if ((anImgP.x === odP.x + odP.w && anImgP.row === odP.row) || (anImgP.x === s80P.x + s80P.w && anImgP.row === s80P.row) || (anImgP.x === gkmcP.x + gkmcP.w && anImgP.row === gkmcP.row) || (anImgP.x === tpabP.x + tpabP.w && anImgP.row === tpabP.row) || (anImgP.x === uuP.x + uuP.w && anImgP.row === uuP.row) || (anImgP.x === damnP.x + damnP.w && anImgP.row === damnP.row)) {
+            anImgP.stay = true;
+        }
+        if (anImgP.x < 127) {
             anImgP.x = 127;
             anImgP.stay = true;
         }
+    
     }
-    if (anImgP.x != 127 || (anImgP.row === od.row && anImgP.x != od.x + 113) || (anImgP.row === s80.row && anImgP.x != s80.x + 113) || (anImgP.row === gkmc.row && anImgP.x != gkmc.x + 113) || (anImgP.row === tpab.row && anImgP.x != tpab.x + 113) || (anImgP.row === uu.row && anImgP.x != uu.x + 113) || (anImgP.row === damn.row && anImgP.x != damn.x + 113)) {
-        opacity = 0;
-    } else {
-        opacity = 0.4;
-    }
+
 }
 
 requestAnimationFrame(loop);
@@ -209,7 +206,7 @@ function loop() {
     ctx.drawImage(damnImg, damn.x, damn.y, damn.w, damn.h);
     ctx.drawImage(tpabImg, tpab.x, tpab.y, tpab.w, tpab.h)
 
-    ctx.globalAlpha = opacity;
+    ctx.globalAlpha = 0.4;
     ctx.drawImage(odImg, odP.x, odP.y, 113, 113);
     ctx.drawImage(s80Img, s80P.x, s80P.y, 113, 113);
     ctx.drawImage(gkmcImg, gkmcP.x, gkmcP.y, 113, 113);
