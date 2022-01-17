@@ -69,6 +69,12 @@ function imgxHandler(anImgP) {
     } else {
         anImgP.row = "bottom"
     }
+
+    if (anImgP.y < 7) {
+        anImgP.y = 7;
+    } else if (anImgP.y > 847) {
+        anImgP.y = 847;
+    }
 }
 
 function previewYHandler(anImgP) {
@@ -76,14 +82,14 @@ function previewYHandler(anImgP) {
 }
 
 function mover(anImgP) {
+    if (anImgP.prow != anImgP.row) {
+        anImgP.x = 805;
+        // anImgP.stay = false
+    }
     if ((anImgP.x === odP.x + odP.w && anImgP.row === odP.row) || (anImgP.x === s80P.x + s80P.w && anImgP.row === s80P.row) || (anImgP.x === gkmcP.x + gkmcP.w && anImgP.row === gkmcP.row) || (anImgP.x === tpabP.x + tpabP.w && anImgP.row === tpabP.row) || (anImgP.x === uuP.x + uuP.w && anImgP.row === uuP.row) || (anImgP.x === damnP.x + damnP.w && anImgP.row === damnP.row)) {
         anImgP.stay = true;
     } else {
         anImgP.stay = false;
-    }
-    if (anImgP.prow != anImgP.row) {
-        anImgP.x = 805;
-        anImgP.stay = false
     }
     while (anImgP.stay === false) {
         anImgP.x -= 113;
@@ -94,9 +100,7 @@ function mover(anImgP) {
             anImgP.x = 127;
             anImgP.stay = true;
         }
-    
     }
-
 }
 
 requestAnimationFrame(loop);
@@ -157,7 +161,6 @@ function loop() {
     if (followmouse === "damn") {
         imgxHandler(damnP);
     }
-
 
     // tier list
     ctx.fillStyle = "rgb(26, 26, 26)";
